@@ -1,5 +1,5 @@
 import sqlite3
-def d(cursor,f,*args):
+def commit_after_execute(cursor,f,*args):
   cursor.execute("""INSERT INTO func (funcname) values (?)""", str(f(*args)))
   conn.commit()
   
@@ -12,6 +12,6 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS func (funcname)""")
 
 
 
-d(cursor,f,1,2)
+commit_after_execute(cursor,f,1,2)
 cursor.execute("SELECT funcname FROM func")
 print(cursor.fetchall())
